@@ -10,16 +10,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//custome middleware
+// customer middleware
 app.use(sortMiddleware)
 
 // course routes
 app.use(courseRoute);
 
-//userRoute
+// userRoute
 app.use(userRoute)
 
-const port = process.env.PORT || 3888;
+const port = process.env.SERVER_PORT || 8081;
 
 app.listen(port, async () => {
     console.log(`Application running on http://localhost:${port}`);
