@@ -15,7 +15,7 @@ class CourseService {
     }
 
     async create(data) {
-        const course = await Course.save({
+        const course = await Course.create({
             name: data?.name,
             description: data?.description,
         })
@@ -37,7 +37,6 @@ class CourseService {
     async deleteOneById(id) {
         return await Course.delete({ id })
     }
-
 
     async restoreCourse(id) {
         return await Course.restore({ id })
