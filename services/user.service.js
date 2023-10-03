@@ -46,6 +46,8 @@ class UserService {
 
     async onOffUserBlock(email, state) {
         const user = await User.findOneAndUpdate({ email: email }, { isBlock: state }, { new: true })
+            .select('-password')
+        // loại bỏ password
 
         if (!user) {
             throw new BaseException(
@@ -67,6 +69,22 @@ class UserService {
 
         return user
 
+    }
+
+
+    async changePassword(userId, password) {
+        const user = await User.findOneAndUpdate({ _id: userId }, { password: password }, { new: true })
+            .select('-password')
+        // loại bỏ password
+
+        if (!user) {
+            throw new BaseException(
+                HttpStatus.NOT_FOUND,
+                ApiResponseCode.DATABASE_ERROR,
+                `User not found with id ${userId}`
+            )
+        }
+        return user
     }
 
 }

@@ -11,7 +11,7 @@ import User from "../models/user.models.js"
 const { hashSync, compareSync, genSaltSync } = bcrypt;
 const { sign } = jwt;
 
-//user
+// register user
 export const createUser = async (req, res, next) => {
     const { firstName, lastName, email, phone, password } = req.body
 
@@ -65,7 +65,7 @@ export const createUser = async (req, res, next) => {
     }
 }
 
-//login user
+// login user
 export const loginUser = async (req, res, next) => {
     const { email, password } = req.body
 
@@ -189,11 +189,9 @@ export const getProfile = async (req, res, next) => {
     const userId = req.userId
 
     try {
-
         const user = await userService.findUserById(userId);
         // Xóa thuộc tính password khỏi đối tượng user
         user.password = ''
-
         return res.status(HttpStatus.OK).send({
             status: ApiResponseCode.SUCCESS,
             message: 'Get user profile successfully!',
@@ -206,6 +204,83 @@ export const getProfile = async (req, res, next) => {
                 status: err.apiStatus,
                 message: err.message
             })
+        }
+        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+            status: ApiResponseCode.OTHER_ERROR,
+            message: err.message
+        })
+
+    }
+}
+
+// getAll user
+export const getAllUser = async (req, res, next) => {
+
+    try {
+        let user = await User.find()
+            .select('-password')
+        // loại bỏ password
+
+        let message
+        if (!user) {
+            message = "Empty message"
+        } else {
+            message = "Success"
+        }
+
+        return res.status(HttpStatus.OK).send({
+            status: ApiResponseCode.SUCCESS,
+            message: message,
+            data: user
+        })
+
+    } catch (err) {
+
+        if (err instanceof BaseException) {
+            return res.status(err.httpStatus).send({
+                status: err.apiStatus,
+                message: err.message
+            })
+        }
+
+        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+            status: ApiResponseCode.OTHER_ERROR,
+            message: err.message
+        })
+
+    }
+
+}
+
+// changePassword
+
+export const changePassword = async (req, res, next) => {
+
+    try {
+
+        const userId = req.userId
+        const { oldPassword, } = req.body
+
+        // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+        const salt = genSaltSync(10);
+        const hashedPassword = hashSync(password, salt);
+
+        const user = await userService.changePassword(userId, hashedPassword)
+
+        return res.status(HttpStatus.OK).send({
+            status: ApiResponseCode.SUCCESS,
+            message: 'Change password successfully!',
+            data: user
+        })
+
+    } catch (err) {
+        if (err instanceof BaseException) {
+
+            return res.status(err.httpStatus).send({
+                status: err.apiStatus,
+                message: err.message
+            })
+
         }
 
         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
