@@ -1,0 +1,42 @@
+- Phát hành thẻ (issuing)
+- Tổng quan về card payment system: tại sao cần?
+--phổ cập cho người dân khi ra khỏi country, chuyển mạch(IPS internional system) card vs POS
+
+POS -> BANK -> CTY HỖ TRỢ THANH TOÁN
+Visa(tư nhân mỹ), mastercard(mỹ), jcb(nhật bản japan club bank), CPI(China union pay), MIR( Nga ) napas: chuẩn ISO8583
+
+- ATM(automatic teller merchine)
+- Bank -> cash -> cướp, SWITCH(hệ thống chuyển mạch liên ngân hàng của Mỹ)
+
+Issuer( ngân hàng phát hành thẻ)
+
+Acquirer( đơn vị chấp nhận thanh toán) máy pos
+
+Payment system: vai trò lớn nhất là chuyển mạch
+
+Acquirer( Đơn vị chấp nhận thanh toán POS, ATM) <-> Payment system <-> Issuer(phát hành ra cái thẻ CARD)
+
+giao dịch nội mạng (Onus)
+giao dịch ngoại mạng (Offus)
+
+- ISO 8583,
+MTID = 0100 (kiểu giao dịch request authoration (chuẩn chi))
+MTID = 0400 (revert, unblock)
+ 1 là authoration chuẩn chi,
+ số 2 giao dịch tài chính
+
++ QR Pay ment: message xuất phát từ Issuer kiểm tra có đủ tiền k trừ tiền luôn  (nếu đủ )-> Acquirer. (mesage ok)
+
++ POS - chu kỳ tăng dần khi nhiều tiền(chốt sổ) nhấn nút Settlement (MTID = 0320) -> Acquirer(kiểm tra nếu bằng ok, nếu lệch badupload) 
+
++ Auth (ghi nhận từ acquier)
++ Fin (ghi nhận từ POS)
+
++ Clearing(đi đòi tiền xóa block thành balance) and Settlement(hoạch toán)
+
+ Acquier NOTRO(tài khoản đối ứng)
+
+ Dual message - Auth - Online
+ Single message - ATM
+
+ Số thẻ đầu 4 của visa, 5 master, 6 jcb, đầu 9 nội bộ các quốc gia, viêt nam (9704) thẻ nội bộ việt nam: dải 16 số, 19 or 21 số. số cuối cùng là đc sinh ra theo thuật toán 

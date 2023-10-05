@@ -1,0 +1,10 @@
+
+  Cmc: chốt số dư , lên sao kê, phát hành thẻ
+  Switching: 
+
+  Way4:1 database
+  WAY4 transaction switch: kết nối tới  payment system, device, external system
+  WAY4 scheduler file server: Way4 manager
+
+  WAY4 web service
+  WAY4 3D secure: 

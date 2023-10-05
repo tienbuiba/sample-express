@@ -19,7 +19,7 @@ app.use(courseRoute);
 // userRoute
 app.use(userRoute)
 
-const port = process.env.SERVER_PORT || 8081;
+const port = process.env.SERVER_PORT || 8080;
 
 app.listen(port, async () => {
     console.log(`Application running on http://localhost:${port}`);

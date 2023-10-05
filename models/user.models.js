@@ -18,6 +18,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+
+    avatarUrl: {
+        type: String,
+        default: 'avt_defaul.png',
+    },
     password: {
         type: String,
         require: true,
@@ -25,7 +30,7 @@ const UserSchema = new mongoose.Schema({
     isBlock: {
         type: Number,//0:active, 1:Block
         require: true,
-        default: 0
+        default: 0,
     }
 }, {
     versionKey: false,
@@ -40,6 +45,5 @@ UserSchema.plugin(mongooseDelete, {
 });
 
 const User = mongoose.model('User', UserSchema)
-
 
 export default User;

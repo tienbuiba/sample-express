@@ -8,12 +8,11 @@ class UserService {
     async findOne(id) {
         const user = await User.findById(id);
         if (!user) {
-            // throw new BaseException(
-            //     HttpStatus.BAD_REQUEST, ApiResponseCode.INVALID_PARAM,
-            //     `User not found with id ${id}`
-            // )
-
-            throw new Error(`User not found with id ${id}`);
+            throw new BaseException(
+                HttpStatus.BAD_REQUEST, ApiResponseCode.INVALID_PARAM,
+                `User not found with id ${id}`
+            )
+            // throw new Error(`User not found with id ${id}`);
         }
         return user;
     }
@@ -32,13 +31,11 @@ class UserService {
         return user
     }
 
-
     async findAll() {
         return await User.find()
     }
 
     async create(data) {
-
         const user = await User.create(data)
         return user;
 
@@ -71,7 +68,6 @@ class UserService {
 
     }
 
-
     async changePassword(userId, password) {
         const user = await User.findOneAndUpdate({ _id: userId }, { password: password }, { new: true })
             .select('-password')
@@ -86,6 +82,22 @@ class UserService {
         }
         return user
     }
+
+    async updateAvatar(avtUrl, userId) {
+        const response = await User.findByIdAndUpdate(
+            { _id: userId },
+            { avatarUrl: avtUrl },
+            { new: true },
+        );
+        if (!response) {
+            throw new CustomError(
+                HttpStatus.NOT_FOUND,
+                ApiResponseCode.DATABASE_ERROR,
+                `Customer not found with id: ${userId}!`,
+            );
+        }
+        return response;
+    };
 
 }
 
