@@ -386,7 +386,7 @@ export const forgotPassword = async (req, res, next) => {
 
         // Tạo JSON Web Token, sign token
         let token = sign(cusInfo, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: process.env.ACCESS_TOKEN_EXPIRATION
+            expiresIn: process.env.RESET_PASSWORD
         });
 
         // Construct the reset link
@@ -423,4 +423,37 @@ export const forgotPassword = async (req, res, next) => {
             message: err.message
         })
     }
+}
+
+
+export const resetPassword = async (req, res, next) => {
+    try {
+
+        const userId= req.userId
+        const { newPassword}= req.body
+
+        // Mã hóa mật khẩu trước khi lưu vào cơ sở dư liệu
+        const salt = genSaltSync(10);
+        const hashedPassword= hashSync(newPassword, salt);
+        await userService.changePassword(userId, hashedPassword)
+
+        return res.status(HttpStatus.OK).send({
+            status: ApiResponseCode.SUCCESS,
+            message: 'Reset Password successfully!'
+        })
+
+        
+    } catch (err) {
+        if( err instanceof BaseException){
+            return res.sattus(err.httpStatus).send({
+                status: ApiResponseCode.OTHER_ERROR,
+                message: err.message
+            })
+        }
+        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+            status: ApiResponseCode.OTHER_ERROR,
+            message: err.message
+        })
+    }
+
 }

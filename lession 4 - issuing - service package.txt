@@ -1,0 +1,9 @@
+kiem soat duoc khai bao dang ki no duoc lam gi trong tung san pham the, limit giao dich, han muc chi tieu, quan ly giao dich the
+
+tinh phi:
+fixed amount
+% transaction
+min amount 
+max amount
+
+1 giao dich co the cau hinh nhieu phi

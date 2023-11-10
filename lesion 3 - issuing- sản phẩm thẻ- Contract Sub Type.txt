@@ -1,0 +1,28 @@
+onus- cùng mạng
+Product ( Card/Issuing): công nghệ làm thẻ: thẻ từ , thẻ chíp( có 8 khoang), công nghệ k tiếp xúc(contactless qua sóng NFT)
+
+Tính năng của thẻ: 
+
+- Debit card: thẻ ghi nợ( trừ tiền), thẻ ATM, nơi quản lý tiền k đặt ở way 4 mà đặt ở core banking, nó là phương tiện rút tiền của tài khoản, k thẻ nộp tiền vào thẻ ( chỉ trừ tiền)
+
+- Prepaid card: thẻ trả trước (luôn luôn 0đ từ khi phát hành), có thể nộp tiền ( cộng tiền và từ tiền)
+
+- Credit card: thẻ tín dụng (cho vay tín chấp, bth là cho vay thế chấp) ( trả sau), được mua hàng trước sau đó mới trả tiền sau.
+   được cấp hạn mức (thông thường x3 lương hàng tháng với nhân viên văn phòng)
+
+   WAY4 Issuing Product:
+   Tariffs: biểu phí
+   Fees: phí
+   Limitaions: số tiền tối đa trong 1 lần
+   //
+   WAY4 bao gồm:
+   Contract Type/Subtype: Device Type or Card Type định nghĩa quy tắc sinh ra Contract
+   Tariffs Domain: Fees,
+   Accounting Schema: bộ tài khoản tính chất quy tắc liên quan giữa các tài khoản
+   Service package: 
+
+   1. Contract Type: trên way4 có 3 kiểu: Account, Card, Device
+
+   Our visa: thẻ của chúng ta 
+
+   HSM: hot security module, thiết bị gen, verify (pin/key)

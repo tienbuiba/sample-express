@@ -1,0 +1,92 @@
+Accounting schema- quan trọng nhất là quản lý dư nợ thẻ
+
+debit- dư nợ quản lý trên core baking
+prepaid- chỉ cần 2 tài khoản, 1 tài khoản để lưu số tiền, 1 tài khoản trừ tiền
+credit-xoay vòng, ( chi tiêu- trả- chi tiêu); bản chất: góc độ ngân hàng cho người chủ thể vay
+
+credit limit: hạn mức tín dụng
+
+
+thông tư 39 ngân hàng nhà nước
+
+tách biệt: gốc, lãi , phí
+nợ trong hạn và nợ quá hạn
+
+
+OPEN: lưu dư nợ kỳ hiện tại
+Open sale : mua hàng,
+Open Cash: rút tiền cash
+Open fee: phí,
+Open interest: lãi interest
+
+GRACE: lát cắt, đến ngày hạn( biling data, due date) sẽ bê hết qua Grace,
+nếu chi tiêu thêm 2 tr thì 2 triệu sẽ xuất hiện ở Open,
+chỉ tồn tại trong khoảng thời gian ân hạn, đến ngày due k trả sẽ chuyển qua close,
+nếu trả full sẽ k tính lãi hoặc ngược lại. 
+Ngân hàng mong muôn tính lãi trên từng giao dịch,
+các CMS hiện tại cả Openway k tính lãi trên giao dịch, mà tính lãi dựa vào số dư cuối ngày, làm giảm workload của hệ thống
+
+Grace sale:
+Grace cash:
+Grace Fee:
+Grace interest:
+
+CLOSE: luôn luôn tính lãi
+Close sale:
+Close cash:
+Close fee:
+Close interest:
+
+
+OVD: theo quy định ngân hàng nhà nước, quá hạn( lãi quá hạn = 150% lãi trong hạn)
+OVD sale:
+OVD cash:
+OVD fee: 
+OVD interest:
+
+
+1. nợ trong hạn:
+trong 7tr có 3tr quá hạn( gốc lãi phí), 4tr trong hạn( gốc lãi phí)
+
+- nếu khách hàng thanh toán ưu tiên trừ lãi và phí trước, gốc sau
+
+có 5 nhóm, nhóm 5 là nợ xấu
+
+2. nợ quá hạn:
+nếu khách hàng thanh toán ưu tiên trừ gốc trước, trừ lãi phí sau
+
+
+WAY4:
+
+trên way4 Priority càng to sẽ đưuọc ưu tiên thanh toán trước
+
+Upper limit Tempele: CH Curent/ CI Deposit: tài khoản đổ vào khi khách hàng thanh toán nó sẽ trừ những tài khoản được định nghĩa nợ gốc,
+ lãi phí cho những tahwngf có Priority lớn nhất về 0 trước đến hết
+
+
++ Billing data: Fix day of month
+
++ Due date:
+  Billing data + n days: như ngân hàng là + 15 ngày
+  Fix day of month
+  cơ chế "next working day" vì nếu ngày 25 là ngày chủ nhật vô cuối tuần. còn "last working day" by defaul ngày làm việc cuối cùng
+
++ MIN TO PAY:
+n%[outstanding balance - OVL] + OVL + [Overdue] + past MTP
+
+past MTP tiền lãi chậm trả tháng trước
+
+VD: 50m
+
+[5% 50M] + 1
+
+VD: 
+
+Tổng 7tr: 
+
+min= 5%, 3% ... của tổng dư nợ( outstanding balance). con số được dùng làm cái cờ ở ngày due date, 
+nếu trả full miễn lãi,
+nếu trả nhỏ hơn min sẽ + phí chậm trả
+
+CT TÍNH LÃI:
+(DƯ NỢ + LÃI SUẤT+ SỐ NGÀY)/365

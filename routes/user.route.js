@@ -1,9 +1,10 @@
 import express from 'express'
-import { changePassword, createUser, forgotPassword, getAllUser, getProfile, loginUser, onOffUserBlock, uploadAvatar } from '../controllers/user.controller.js'
+import { changePassword, createUser, forgotPassword, getAllUser, getProfile, loginUser, onOffUserBlock, resetPassword, uploadAvatar } from '../controllers/user.controller.js'
 import { verifyToken } from '../middlewares/authJwt.js'
 import multer from 'multer';
 import { storage } from '../middlewares/uploadFile.js';
 import { validateLogin, validateRegister } from '../middlewares/validator.js';
+import userService from '../services/user.service.js';
 
 const userRoute = express.Router();
 const upload = multer({ storage: storage })
@@ -33,6 +34,10 @@ userRoute.put('/api/v1/user/update-avatar',
 
 // forgotPassword
 userRoute.post('/api/v1/forgot-password', forgotPassword)
+
+
+// reset password
+userRoute.post('/api/v1/reset-password', verifyToken, resetPassword)
 
 export default userRoute;
 
